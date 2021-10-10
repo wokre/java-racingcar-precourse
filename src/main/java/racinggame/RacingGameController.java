@@ -1,5 +1,7 @@
 package racinggame;
 
+import java.util.List;
+
 /**
  * Created By bohyun on 2021/10/09
  */
@@ -11,12 +13,15 @@ public class RacingGameController {
         return view.racingStart();
     }
 
-    public void racing(String[] racingInfo) {
-        String[] racing_cars = racingInfo[0].split(",");
-        int racing_turn = Integer.valueOf(racingInfo[1]);
+    public RacingScore racing(String[] racingInfo) {
+        return model.racing(racingInfo);
+    }
 
-        for (int i = 0; i < racing_turn; i++) {
+    public List<String> racingFinish(RacingScore racing) {
+        return model.racingFinish(racing);
+    }
 
-        }
+    public void announcedWinner(List<String> winners) {
+        view.announcedWinner(winners);
     }
 }
