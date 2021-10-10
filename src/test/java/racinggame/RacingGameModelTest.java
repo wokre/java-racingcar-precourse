@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.*;
 
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.assertj.core.api.Assertions.doesNotHave;
+
 /**
  * Created By bohyun on 2021/10/10
  */
@@ -50,5 +53,25 @@ class RacingGameModelTest {
         System.out.println(list);
         String s = String.join(", ", list);
         System.out.println(s);
+    }
+
+    @Test
+    void check_str_length() {
+        String str = "javaji";
+        assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> {
+           if (str.length() > 6) throw new NoSuchElementException("ERROR");
+        });
+    }
+
+    @Test
+    void test_exception() {
+        int cnt = 0;
+        for (int i = 0; i < 5; i++) {
+            cnt += i;
+            if (i == 4) {
+                throw new IllegalArgumentException();
+            }
+        }
+        System.out.println("count >>>>>>>>>>>>>>>>>>>> " + cnt);
     }
 }

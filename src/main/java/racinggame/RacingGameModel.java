@@ -8,10 +8,10 @@ import java.util.*;
  * Created By bohyun on 2021/10/09
  */
 public class RacingGameModel {
+    private static final String ERROR_MESSAGE = "[ERROR]";
 
-    public RacingScore racing(String[] racingInfo) {
-        String[] racingCars = racingInfo[0].split(",");
-        int racing_turn = Integer.valueOf(racingInfo[1]);
+    public RacingScore racing(String[] racingCars, String racingTurn) {
+        int racing_turn = Integer.valueOf(racingTurn);
 
         Map<String, String> scoreInitialize = scoreInitialize(racingCars);
         RacingScore racingScore = new RacingScore(scoreInitialize);
@@ -19,8 +19,6 @@ public class RacingGameModel {
         for (int i = 0; i < racing_turn; i++) {
             racingScore = getRacingScore(racingCars, racingScore);
         }
-        System.out.println("racing score");
-        System.out.println(racingScore.getRacingScore());
         return racingScore;
     }
 
@@ -29,9 +27,9 @@ public class RacingGameModel {
         for (String car : racingCars) {
             String score = scoreMap.get(car);
             int num = Randoms.pickNumberInRange(0, 9);
-            System.out.println("car : " + car + " random : " + num);
             score = goOrStop(score, num);
             scoreMap.put(car, score);
+            System.out.println(car + " : " + score);
         }
         racingScore = new RacingScore(scoreMap);
         return racingScore;
@@ -71,4 +69,15 @@ public class RacingGameModel {
         }
     }
 
+    public void checkCarName(String[] racingCars) {
+        for (String s : racingCars) {
+            checkCarNameLength(s);
+        }
+    }
+    private void checkCarNameLength(String car) {
+        if (car.trim().length() > 5) {
+            System.out.println(car);
+            throw new NoSuchElementException(ERROR_MESSAGE);
+        }
+    }
 }

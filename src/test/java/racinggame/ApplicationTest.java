@@ -1,9 +1,16 @@
 package racinggame;
 
 import nextstep.test.NSTest;
+import nextstep.utils.Console;
+import org.assertj.core.util.Strings;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.io.ByteArrayInputStream;
+import java.util.NoSuchElementException;
+
+import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 
 public class ApplicationTest extends NSTest {
     private static final int MOVING_FORWARD = 4;
@@ -29,6 +36,14 @@ public class ApplicationTest extends NSTest {
         assertSimpleTest(() -> {
             runNoLineFound("pobi,javaji");
             verify(ERROR_MESSAGE);
+        });
+    }
+
+    @Test
+    void test() {
+        assertThatExceptionOfType(NoSuchElementException.class).isThrownBy(() -> {
+            Console.readLine();
+            System.out.println("occurred exception!!!");
         });
     }
 
